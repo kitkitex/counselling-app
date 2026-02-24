@@ -4,7 +4,7 @@ export default function Bio() {
   const router = useRouter();
   const { message } = router.query; // 接收來自上一頁的留言
 
-  const whatsappNumber = "85212345678"; // 👈 請改成輔導員真正的 WhatsApp 號碼
+  const whatsappNumber = "85298844925"; // 👈 請改成輔導員真正的 WhatsApp 號碼
   
   const goToWhatsApp = () => {
     // 將留言編碼並帶入 WhatsApp 連結

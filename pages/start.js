@@ -1,15 +1,27 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Start() {
   const router = useRouter();
-  const { name } = router.query;
+  // 增加一個 state 來管理名字，並預設嘗試從網址獲取
+  const [name, setName] = useState('');
   const [message, setMessage] = useState('');
   const maxLength = 1000;
+
+  // 當網址參數準備好時，更新名字
+  useEffect(() => {
+    if (router.query.name) {
+      setName(router.query.name);
+    }
+  }, [router.query.name]);
 
   if (!router.isReady) return null;
 
   const handleSend = () => {
+    if (!name.trim()) {
+      alert("請輸入你嘅稱呼。");
+      return;
+    }
     if (!message.trim()) {
       alert("可以先寫下你想講嘅嘢，等輔導員更容易了解你。");
       return;
@@ -24,7 +36,7 @@ export default function Start() {
   return (
     <div style={{
       minHeight: '100vh',
-      backgroundColor: '#F0F4F8', // 與首頁一致的輕盈灰藍背景
+      backgroundColor: '#F0F4F8',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -37,17 +49,15 @@ export default function Start() {
         maxWidth: '500px',
         width: '100%',
         borderRadius: '28px',
-        boxShadow: '0 15px 35px rgba(16, 42, 67, 0.08)', // 柔和的深藍基調陰影
+        boxShadow: '0 15px 35px rgba(16, 42, 67, 0.08)',
         padding: '40px',
         textAlign: 'left'
       }}>
         
-        {/* 標題 */}
         <h2 style={{ fontSize: '22px', fontWeight: '600', color: '#102A43', marginBottom: '15px' }}>
           第一次傾偈係點嘅
         </h2>
         
-        {/* 資訊標籤區 */}
         <div style={{ 
           display: 'flex', 
           alignItems: 'center', 
@@ -64,24 +74,52 @@ export default function Start() {
           <span>免費</span>
         </div>
 
-        {/* 說明文字 */}
         <div style={{ fontSize: '16px', color: '#486581', lineHeight: '1.8', marginBottom: '30px' }}>
           <p style={{ margin: '8px 0' }}>佢會問你最近點，唔需要解釋好多背景。</p>
           <p style={{ margin: '8px 0' }}>傾完之後你先決定想唔想繼續。</p>
-          <p style={{ marginTop: '20px', color: '#102A43', fontWeight: '500' }}>
-            如果你想，可以先講少少——
-          </p>
         </div>
 
-        {/* 留言輸入框 */}
+        {/* 新增：稱呼與名字輸入欄 */}
+        <div style={{ marginBottom: '20px' }}>
+          <p style={{ fontSize: '15px', fontWeight: '500', color: '#102A43', marginBottom: '10px' }}>你想我點樣稱呼你？</p>
+          <input 
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="輸入名字"
+            style={{
+              width: '100%',
+              padding: '15px',
+              borderRadius: '12px',
+              border: '2px solid #D1DBD1',
+              backgroundColor: '#F8FAFC',
+              fontSize: '16px',
+              outline: 'none',
+              transition: 'all 0.2s',
+              color: '#334E68',
+              boxSizing: 'border-box'
+            }}
+            onFocus={(e) => {
+              e.target.style.borderColor = '#486581';
+              e.target.style.backgroundColor = '#ffffff';
+            }}
+            onBlur={(e) => {
+              e.target.style.borderColor = '#D1DBD1';
+              e.target.style.backgroundColor = '#F8FAFC';
+            }}
+          />
+        </div>
+
+        {/* 留言內容 */}
         <div style={{ position: 'relative', marginBottom: '20px' }}>
+          <p style={{ fontSize: '15px', fontWeight: '500', color: '#102A43', marginBottom: '10px' }}>如果你想，可以先講少少——</p>
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value.slice(0, maxLength))}
-            placeholder={`你好 ${name || ''}，喺度寫低你想講嘅嘢...`}
+            placeholder="喺度寫低你想講嘅嘢..."
             style={{
               width: '100%',
-              height: '180px',
+              height: '150px',
               padding: '15px',
               borderRadius: '16px',
               border: '2px solid #D1DBD1',
@@ -104,7 +142,6 @@ export default function Start() {
               e.target.style.backgroundColor = '#F8FAFC';
             }}
           />
-          {/* 字數統計 */}
           <div style={{
             textAlign: 'right',
             fontSize: '12px',
@@ -115,13 +152,12 @@ export default function Start() {
           </div>
         </div>
 
-        {/* 改後的深灰藍按鈕 */}
         <button 
           onClick={handleSend}
           style={{ 
             width: '100%',
             padding: '18px', 
-            backgroundColor: '#486581', // 與首頁按鈕色一致
+            backgroundColor: '#486581', 
             color: 'white', 
             border: 'none', 
             borderRadius: '15px', 

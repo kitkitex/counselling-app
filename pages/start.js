@@ -9,9 +9,7 @@ export default function Start() {
 
   if (!router.isReady) return null;
 
-  // 定義發送邏輯：跳轉到 bio 頁面並傳遞留言
   const handleSend = () => {
-    // 如果沒寫字，可以給個溫馨提示（可選）
     if (!message.trim()) {
       alert("可以先寫下你想講嘅嘢，等輔導員更容易了解你。");
       return;
@@ -19,41 +17,44 @@ export default function Start() {
 
     router.push({
       pathname: '/bio',
-      query: { message: message, name: name } // 把名字也傳過去，讓 bio 頁面更親切
+      query: { message: message, name: name }
     });
   };
 
   return (
     <div style={{
       minHeight: '100vh',
-      backgroundColor: '#f5f7fa',
+      backgroundColor: '#F0F4F8', // 與首頁一致的輕盈灰藍背景
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       padding: '20px',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+      fontFamily: '"PingFang HK", "Helvetica Neue", sans-serif',
+      color: '#334E68'
     }}>
       <div style={{
         backgroundColor: '#ffffff',
         maxWidth: '500px',
         width: '100%',
         borderRadius: '28px',
-        boxShadow: '0 15px 35px rgba(0,0,0,0.05)',
+        boxShadow: '0 15px 35px rgba(16, 42, 67, 0.08)', // 柔和的深藍基調陰影
         padding: '40px',
         textAlign: 'left'
       }}>
         
-        <h2 style={{ fontSize: '22px', fontWeight: '800', color: '#2d3436', marginBottom: '15px' }}>
+        {/* 標題 */}
+        <h2 style={{ fontSize: '22px', fontWeight: '600', color: '#102A43', marginBottom: '15px' }}>
           第一次傾偈係點嘅
         </h2>
         
+        {/* 資訊標籤區 */}
         <div style={{ 
           display: 'flex', 
           alignItems: 'center', 
           gap: '10px', 
           fontSize: '14px', 
-          color: '#0984e3', 
-          fontWeight: '600',
+          color: '#486581', 
+          fontWeight: '500',
           marginBottom: '25px' 
         }}>
           <span>15–20分鐘</span>
@@ -63,14 +64,16 @@ export default function Start() {
           <span>免費</span>
         </div>
 
-        <div style={{ fontSize: '16px', color: '#636e72', lineHeight: '1.8', marginBottom: '30px' }}>
-          <p>佢會問你最近點，唔需要解釋好多背景。</p>
-          <p>傾完之後你先決定想唔想繼續。</p>
-          <p style={{ marginTop: '20px', color: '#2d3436', fontWeight: '500' }}>
+        {/* 說明文字 */}
+        <div style={{ fontSize: '16px', color: '#486581', lineHeight: '1.8', marginBottom: '30px' }}>
+          <p style={{ margin: '8px 0' }}>佢會問你最近點，唔需要解釋好多背景。</p>
+          <p style={{ margin: '8px 0' }}>傾完之後你先決定想唔想繼續。</p>
+          <p style={{ marginTop: '20px', color: '#102A43', fontWeight: '500' }}>
             如果你想，可以先講少少——
           </p>
         </div>
 
+        {/* 留言輸入框 */}
         <div style={{ position: 'relative', marginBottom: '20px' }}>
           <textarea
             value={message}
@@ -81,50 +84,66 @@ export default function Start() {
               height: '180px',
               padding: '15px',
               borderRadius: '16px',
-              border: '2px solid #edf2f7',
+              border: '2px solid #D1DBD1',
+              backgroundColor: '#F8FAFC',
               fontSize: '16px',
               fontFamily: 'inherit',
               lineHeight: '1.6',
               resize: 'none',
               boxSizing: 'border-box',
               outline: 'none',
-              transition: 'border-color 0.2s'
+              transition: 'all 0.2s',
+              color: '#334E68'
             }}
-            onFocus={(e) => e.target.style.borderColor = '#0984e3'}
-            onBlur={(e) => e.target.style.borderColor = '#edf2f7'}
+            onFocus={(e) => {
+              e.target.style.borderColor = '#486581';
+              e.target.style.backgroundColor = '#ffffff';
+            }}
+            onBlur={(e) => {
+              e.target.style.borderColor = '#D1DBD1';
+              e.target.style.backgroundColor = '#F8FAFC';
+            }}
           />
+          {/* 字數統計 */}
           <div style={{
             textAlign: 'right',
             fontSize: '12px',
-            color: message.length >= maxLength ? '#d63031' : '#b2bec3',
+            color: message.length >= maxLength ? '#D63031' : '#94A3B8',
             marginTop: '5px'
           }}>
             {message.length} / {maxLength} 字
           </div>
         </div>
 
-        {/* 改後的按鈕 */}
+        {/* 改後的深灰藍按鈕 */}
         <button 
           onClick={handleSend}
           style={{ 
             width: '100%',
-            padding: '16px', 
-            backgroundColor: '#0984e3', 
+            padding: '18px', 
+            backgroundColor: '#486581', // 與首頁按鈕色一致
             color: 'white', 
             border: 'none', 
-            borderRadius: '12px', 
+            borderRadius: '15px', 
             fontSize: '16px', 
-            fontWeight: 'bold',
+            fontWeight: '500',
             cursor: 'pointer',
-            transition: 'background-color 0.2s'
+            transition: 'all 0.2s',
+            boxShadow: '0 4px 12px rgba(72, 101, 129, 0.2)'
           }}
-          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0769b5'}
-          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#0984e3'}
+          onMouseOver={(e) => {
+            e.currentTarget.style.backgroundColor = '#334E68';
+            e.currentTarget.style.transform = 'translateY(-1px)';
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.backgroundColor = '#486581';
+            e.currentTarget.style.transform = 'translateY(0)';
+          }}
         >
           確認並查看輔導員資料
         </button>
 
-        <p style={{ textAlign: 'center', color: '#b2bec3', fontSize: '12px', marginTop: '20px' }}>
+        <p style={{ textAlign: 'center', color: '#94A3B8', fontSize: '12px', marginTop: '20px' }}>
           你的留言將會保密處理
         </p>
       </div>

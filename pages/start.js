@@ -9,6 +9,20 @@ export default function Start() {
 
   if (!router.isReady) return null;
 
+  // 定義發送邏輯：跳轉到 bio 頁面並傳遞留言
+  const handleSend = () => {
+    // 如果沒寫字，可以給個溫馨提示（可選）
+    if (!message.trim()) {
+      alert("可以先寫下你想講嘅嘢，等輔導員更容易了解你。");
+      return;
+    }
+
+    router.push({
+      pathname: '/bio',
+      query: { message: message, name: name } // 把名字也傳過去，讓 bio 頁面更親切
+    });
+  };
+
   return (
     <div style={{
       minHeight: '100vh',
@@ -26,10 +40,9 @@ export default function Start() {
         borderRadius: '28px',
         boxShadow: '0 15px 35px rgba(0,0,0,0.05)',
         padding: '40px',
-        textAlign: 'left' // 改為向左對齊，更有專業對話感
+        textAlign: 'left'
       }}>
         
-        {/* 標題與資訊區 */}
         <h2 style={{ fontSize: '22px', fontWeight: '800', color: '#2d3436', marginBottom: '15px' }}>
           第一次傾偈係點嘅
         </h2>
@@ -58,7 +71,6 @@ export default function Start() {
           </p>
         </div>
 
-        {/* 留言對話欄 */}
         <div style={{ position: 'relative', marginBottom: '20px' }}>
           <textarea
             value={message}
@@ -81,7 +93,6 @@ export default function Start() {
             onFocus={(e) => e.target.style.borderColor = '#0984e3'}
             onBlur={(e) => e.target.style.borderColor = '#edf2f7'}
           />
-          {/* 字數計數器 */}
           <div style={{
             textAlign: 'right',
             fontSize: '12px',
@@ -92,9 +103,9 @@ export default function Start() {
           </div>
         </div>
 
-        {/* 送出按鈕 */}
+        {/* 改後的按鈕 */}
         <button 
-          onClick={() => alert('感謝你的留言！這是一個範例網頁，暫未連接後台。')}
+          onClick={handleSend}
           style={{ 
             width: '100%',
             padding: '16px', 
@@ -104,10 +115,13 @@ export default function Start() {
             borderRadius: '12px', 
             fontSize: '16px', 
             fontWeight: 'bold',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            transition: 'background-color 0.2s'
           }}
+          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0769b5'}
+          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#0984e3'}
         >
-          發送給輔導員
+          確認並查看輔導員資料
         </button>
 
         <p style={{ textAlign: 'center', color: '#b2bec3', fontSize: '12px', marginTop: '20px' }}>

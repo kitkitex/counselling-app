@@ -86,11 +86,21 @@ export default function Home() {
               fontSize: '16px', 
               fontWeight: 'bold',
               cursor: 'pointer',
-              transition: 'all 0.2s shadow'
+              marginBottom: '20px'
             }}
           >
             開始傾訴
           </button>
+
+          {/* 新增的底部承諾文字 */}
+          <p style={{ 
+            fontSize: '13px', 
+            color: '#b2bec3', 
+            lineHeight: '1.6',
+            margin: '0'
+          }}>
+            對話保密。第一次免費。隨時可以唔繼續。
+          </p>
         </div>
       </div>
     </div>

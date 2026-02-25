@@ -16,105 +16,102 @@ export default function Home() {
   return (
     <div style={{
       minHeight: '100vh',
-      backgroundColor: '#F0F4F8', // 輕盈的灰藍色背景
+      backgroundColor: '#F0F4F8',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
       padding: '40px 20px',
       fontFamily: '"PingFang HK", "Helvetica Neue", sans-serif',
-      color: '#334E68' // 深灰藍文字
+      color: '#334E68'
     }}>
       
       {/* 頂部文字區 */}
-      <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+      <div style={{ textAlign: 'center', marginBottom: '50px' }}>
         <p style={{ 
-          fontSize: '14px', 
+          fontSize: '13px', 
           letterSpacing: '4px', 
-          color: '#627D98', // 中灰藍標籤色
-          marginBottom: '30px',
+          color: '#627D98', 
+          marginBottom: '25px',
           fontWeight: '300'
         }}>CLEARSTEP</p>
         
         <h1 style={{ 
-          fontSize: '28px', 
+          fontSize: '24px', 
           fontWeight: '500', 
-          marginBottom: '25px',
+          marginBottom: '20px',
           letterSpacing: '1px',
-          color: '#102A43' // 最深色標題
+          color: '#102A43'
         }}>有啲嘢，講出嚟會容易啲。</h1>
         
-        <p style={{ fontSize: '16px', color: '#486581', margin: '5px 0' }}>你朋友認識一班受過訓練嘅輔導員。</p>
-        <p style={{ fontSize: '16px', color: '#486581', margin: '5px 0' }}>佢信任佢地，想介紹你地認識。</p>
+        <p style={{ fontSize: '15px', color: '#486581', margin: '4px 0' }}>你朋友認識一班受過訓練嘅輔導員。</p>
+        <p style={{ fontSize: '15px', color: '#486581', margin: '4px 0' }}>佢信任佢地，想介紹你地認識。</p>
       </div>
 
-      {/* 中間白色卡片 */}
+      {/* 中間白色卡片 - 比例縮小 */}
       <div style={{
         backgroundColor: '#ffffff',
-        maxWidth: '420px',
+        maxWidth: '360px', // 從 420px 縮小到 360px
         width: '100%',
-        borderRadius: '35px',
-        aspectRatio: '1 / 1.1',
+        borderRadius: '30px',
+        aspectRatio: '1 / 1.05', // 稍微調整比例，不要太長
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '40px',
-        boxShadow: '0 20px 40px rgba(16, 42, 67, 0.06)', // 帶有深藍基調的柔和陰影
-        marginBottom: '80px'
+        padding: '30px', // 減少內邊距讓內容更緊湊
+        boxShadow: '0 20px 40px rgba(16, 42, 67, 0.06)',
+        marginBottom: '60px'
       }}>
-        {/* 頂部小 Icon 裝飾 - 改為灰藍色 */}
-        <div style={{ opacity: 0.4, marginBottom: '20px' }}>
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#627D98" strokeWidth="1">
+        <div style={{ opacity: 0.4, marginBottom: '15px' }}>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#627D98" strokeWidth="1">
             <path d="M12 2L12 6M12 18L12 22M4.93 4.93L7.76 7.76M16.24 16.24L19.07 19.07M2 12L6 12M18 12L22 12M4.93 19.07L7.76 16.24M16.24 7.76L19.07 4.93" />
           </svg>
         </div>
 
         <div style={{ 
-          width: '40px', 
+          width: '30px', 
           height: '1px', 
           backgroundColor: '#BCCCDC', 
-          marginBottom: '30px' 
+          marginBottom: '25px' 
         }}></div>
 
         <p style={{ 
-          fontSize: '20px', 
+          fontSize: '18px', // 配合卡片縮小，字體也稍微調小
           lineHeight: '1.6', 
           textAlign: 'center', 
           fontWeight: '400',
-          padding: '0 10px',
+          padding: '0 15px',
           color: '#243B53'
         }}>
-          改變唔一定要好大。有時一步已經好多。
+          改變唔一定要好大。<br/>有時一步已經好多。
         </p>
 
         <div style={{ 
-          marginTop: '30px',
+          marginTop: '25px',
           opacity: 0.3 
         }}>
-          {/* 底部 Icon 裝飾 - 改為盾牌形狀象徵安全 */}
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#627D98" strokeWidth="1">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#627D98" strokeWidth="1">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
           </svg>
         </div>
       </div>
 
       {/* 底部按鈕區 */}
-      <div style={{ width: '100%', maxWidth: '420px', textAlign: 'center' }}>
-        
+      <div style={{ width: '100%', maxWidth: '360px', textAlign: 'center' }}>
         <button 
           onClick={goToCounselling}
           style={{ 
             width: '100%',
-            padding: '20px', 
-            backgroundColor: '#486581', // 沉穩的灰藍色按鈕
+            padding: '18px', 
+            backgroundColor: '#486581', 
             color: 'white', 
             border: 'none', 
-            borderRadius: '18px', 
-            fontSize: '18px', 
+            borderRadius: '16px', 
+            fontSize: '17px', 
             fontWeight: '400',
             cursor: 'pointer',
-            marginBottom: '30px',
+            marginBottom: '25px',
             transition: 'background-color 0.2s'
           }}
           onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#334E68'}
@@ -124,7 +121,7 @@ export default function Home() {
         </button>
 
         <p style={{ 
-          fontSize: '13px', 
+          fontSize: '12px', 
           color: '#627D98', 
           letterSpacing: '0.5px'
         }}>
